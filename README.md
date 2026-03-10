@@ -1,8 +1,10 @@
 ## WhatsApp Inspired Messenger App UI
+
 A high-fidelity Flutter implementation of a modern messenger interface, inspired by the latest WhatsApp UI. 
 This project is being developed as a Final Project (UAS) for the Mobile Programming course.
 ---
 ### 📱 Project Overview
+
 Developer: Olivia Joanna Sanusi (Information Systems 2024, UPH)
 
 Framework: Flutter (Dart)
