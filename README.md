@@ -3,7 +3,7 @@
 A high-fidelity Flutter implementation of a modern messenger interface, inspired by the latest WhatsApp UI. 
 This project is being developed as a Final Project (UAS) for the Mobile Programming course.
 ---
-### 📱 Project Overview
+### Project Overview
 
 Developer: Olivia Joanna Sanusi (Information Systems 2024, UPH)
 
@@ -11,7 +11,7 @@ Framework: Flutter (Dart)
 Timeline: February 4, 2026 – April 15, 2026 
 Objective: To recreate the modern WhatsApp UI experience, including interactive navigation, sticky headers, and specific feature modules.
 ---
-### 📂 Project Structure
+### Project Structure
 The lib directory is organized using a layer-first approach to ensure scalability and ease of database integration later:
 ```
 lib/
