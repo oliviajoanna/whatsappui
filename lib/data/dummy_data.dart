@@ -1,4 +1,8 @@
 import '../models/chat_model.dart';
+import '../models/status_model.dart';
+import '../models/channel_model.dart';
+import '../models/community_model.dart';
+
 
 class DummyData {
   static const List<ChatModel> chats = [
@@ -60,6 +64,87 @@ class DummyData {
       lastMessage: "Typing...",
       time: "08:15",
       imageUrl: "https://picsum.photos/seed/project/200",
+    ),
+  ];
+
+
+// TAMBAHKAN DATA STATUS DI SINI
+  static const List<StatusModel> statuses = [
+    StatusModel(
+    name: "Uri Pilates Studio P...",
+      imageUrl: "https://picsum.photos/seed/uri/400/700",
+    ),
+    StatusModel(
+      name: "Kusno",
+      imageUrl: "https://picsum.photos/seed/cat/400/700",
+    ),
+    StatusModel(
+      name: "Mr. Esron Sinambela",
+      imageUrl: "https://picsum.photos/seed/esron/400/700",
+    ),
+    StatusModel(
+      name: "Melisa Ekahana",
+      imageUrl: "https://picsum.photos/seed/melisa/400/700",
+    ),
+  ];
+
+  // TAMBAHKAN DATA CHANNEL DI SINI
+  static const List<ChannelModel> channels = [
+    ChannelModel(
+      name: "Olympics",
+      description: "Confidence ✅ Passion ✅ Fit ch...",
+      date: "Yesterday",
+      imageUrl: "https://picsum.photos/seed/olympics/200",
+    ),
+    ChannelModel(
+      name: "Sistem Informasi UPH",
+      description: "Sekilas cuplikan dari keseharian ...",
+      date: "11/15/25",
+      imageUrl: "https://picsum.photos/seed/uph/200",
+    ),
+    ChannelModel(
+      name: "SI-Update",
+      description: "The channel 'SI-Update' was created",
+      date: "Yesterday",
+      imageUrl: "https://picsum.photos/seed/siupdate/200",
+    ),
+  ];
+
+  static const List<CommunityModel> communities = [
+    CommunityModel(
+      name: "HMPSSI 2025/2026",
+      imageUrl: "https://picsum.photos/seed/hmpssi/200",
+      subGroups: [
+        SubGroupModel(
+          name: "Announcements",
+          lastSender: "Tristanto Wijaya (IS 24)",
+          lastMessage: "added the gr...",
+          time: "10/29/25",
+          imageUrl: "",
+          isAnnouncements: true,
+        ),
+        SubGroupModel(
+          name: "Creative Media HMPSSI 2...",
+          lastSender: "Mishael",
+          lastMessage: "Thank you",
+          time: "08:44",
+          imageUrl: "https://picsum.photos/seed/media/200",
+        ),
+      ],
+    ),
+    CommunityModel(
+      name: "Panitia IS Night 2026",
+      imageUrl: "https://picsum.photos/seed/isnight/200",
+      subGroups: [
+        SubGroupModel(
+          name: "Announcements",
+          lastSender: "+62 813-8787-3288",
+          lastMessage: "joined",
+          time: "3/12/26",
+          imageUrl: "",
+          isAnnouncements: true,
+        ),
+      ],
     ),
   ];
 }
