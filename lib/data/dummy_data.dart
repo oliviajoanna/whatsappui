@@ -2,6 +2,7 @@ import '../models/chat_model.dart';
 import '../models/status_model.dart';
 import '../models/channel_model.dart';
 import '../models/community_model.dart';
+import '../models/calls_model.dart';
 
 
 class DummyData {
@@ -147,4 +148,13 @@ class DummyData {
       ],
     ),
   ];
+
+  static const List<CallModel> calls = [
+    CallModel(name: "Jamie", time: "Today, 08:22", imageUrl: "", isVideo: true, isIncoming: false),
+    CallModel(name: "Dokter Sandra", time: "Yesterday, 20:47", imageUrl: ""),
+    CallModel(name: "Jagoan", time: "Yesterday, 19:59", imageUrl: "", isIncoming: false),
+    CallModel(name: "Kate Shrine", time: "Yesterday, 17:16", imageUrl: "https://picsum.photos/seed/tania/200", isIncoming: false),
+    CallModel(name: "Boss", time: "Yesterday, 11:27", imageUrl: "https://picsum.photos/seed/cathrine/200"),
+  ];
+
 }

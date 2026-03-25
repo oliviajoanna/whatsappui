@@ -12,6 +12,6 @@ class AppColors {
   
   // Modern UI specific (White theme)
   static const Color white = Colors.white;
-  static const Color surfaceGray = Color(0xFFF6F7F9);
-  static const Color textGray = Colors.grey;
+  static const Color surfaceGray = Color.fromARGB(255, 228, 228, 228);
+  static const Color textGray = Color(0xFF616161);
 }
