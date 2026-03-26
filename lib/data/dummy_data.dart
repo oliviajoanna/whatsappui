@@ -3,6 +3,7 @@ import '../models/status_model.dart';
 import '../models/channel_model.dart';
 import '../models/community_model.dart';
 import '../models/calls_model.dart';
+import '../models/find_channel_model.dart';
 
 
 class DummyData {
@@ -11,14 +12,14 @@ class DummyData {
       name: "Sistem Informasi 2024",
       lastMessage: "Olivia (IS 24): Guys hari ini present....",
       time: "09:13",
-      imageUrl: "https://picsum.photos/seed/si24/200",
+      imageUrl: "https://picsum.photos/id/60/200",
       unreadCount: 2,
     ),
     ChatModel(
       name: "HMPSSI 2025/2026",
-      lastMessage: "HMPSSI 2025/2026: tolong kabari ya",
+      lastMessage: "Mishael: Join live hm guys",
       time: "09:09",
-      imageUrl: "https://picsum.photos/seed/hmpssi/200",
+      imageUrl: "https://picsum.photos/id/158/200",
       unreadCount: 12,
       isPinned: true,
     ),
@@ -49,21 +50,21 @@ class DummyData {
       imageUrl: "https://picsum.photos/seed/qpon/200",
     ),
     ChatModel(
-      name: "Jane Smith",
+      name: "Pak Suworno (gojek)",
       lastMessage: "Sticker",
       time: "Yesterday",
       imageUrl: "https://picsum.photos/seed/jane/200",
     ),
     ChatModel(
-      name: "Mami",
+      name: "Mami 🤱",
       lastMessage: "Jangan lupa makan",
       time: "Yesterday",
       imageUrl: "https://picsum.photos/seed/family/200",
     ),
     ChatModel(
-      name: "Sportify",
-      lastMessage: "Typing...",
-      time: "08:15",
+      name: "+62 888-8000-333",
+      lastMessage: "Berikut terlampir untuk minimum charge",
+      time: "3/23/26",
       imageUrl: "https://picsum.photos/seed/project/200",
     ),
   ];
@@ -72,19 +73,19 @@ class DummyData {
 // TAMBAHKAN DATA STATUS DI SINI
   static const List<StatusModel> statuses = [
     StatusModel(
-    name: "Uri Pilates Studio P...",
+    name: "Uri Pilates Studio",
       imageUrl: "https://picsum.photos/seed/uri/400/700",
     ),
     StatusModel(
-      name: "Kusno",
+      name: "Angela Markus",
       imageUrl: "https://picsum.photos/seed/cat/400/700",
     ),
     StatusModel(
-      name: "Mr. Esron Sinambela",
+      name: "Mr. Esron",
       imageUrl: "https://picsum.photos/seed/esron/400/700",
     ),
     StatusModel(
-      name: "Melisa Ekahana",
+      name: "Melisa Gunawan",
       imageUrl: "https://picsum.photos/seed/melisa/400/700",
     ),
   ];
@@ -111,8 +112,72 @@ class DummyData {
     ),
   ];
 
+  static const List<FindChannelModel> suggestedChannels = [
+  FindChannelModel(
+    name: "No One Cares",
+    description: "",
+    date: "",
+    imageUrl: "https://picsum.photos/id/200/200",
+    followers: "8.5M",
+    isVerified: true,
+  ),
+  FindChannelModel(
+    name: "Info Stock",
+    description: "",
+    date: "",
+    imageUrl: "https://picsum.photos/id/201/200",
+    followers: "231M",
+    isVerified: true,
+  ),
+  FindChannelModel(
+    name: "stiker meme rndm.",
+    description: "",
+    date: "",
+    imageUrl: "https://picsum.photos/id/202/200",
+    followers: "54K",
+    isVerified: false,
+  ),
+];
+
+  
+
   static const List<CommunityModel> communities = [
+   CommunityModel(
+      name: "Information Systems UPH",
+      imageUrl: "https://picsum.photos/seed/uph/200",
+      subGroups: [
+        SubGroupModel(
+          name: "Announcements",
+          lastSender: "Calandra)",
+          lastMessage: "Dear Mahasiswa",
+          time: "Yesterday",
+          imageUrl: "",
+          isAnnouncements: true,
+        ),
+        SubGroupModel(
+          name: "IS Regular 24",
+          lastSender: "Calandra",
+          lastMessage: "Reminder: Meeting tomorrow at 10 AM",
+          time: "08:44",
+          imageUrl: "https://picsum.photos/seed/chat/100",
+        ),
+      ],
+    ),
     CommunityModel(
+      name: "Panitia IS Night 2026",
+      imageUrl: "https://picsum.photos/seed/isnight/200",
+      subGroups: [
+        SubGroupModel(
+          name: "Announcements",
+          lastSender: "+62 813-8787-3288",
+          lastMessage: "joined",
+          time: "3/12/26",
+          imageUrl: "",
+          isAnnouncements: true,
+        ),
+      ],
+    ),
+     CommunityModel(
       name: "HMPSSI 2025/2026",
       imageUrl: "https://picsum.photos/seed/hmpssi/200",
       subGroups: [
@@ -133,28 +198,24 @@ class DummyData {
         ),
       ],
     ),
-    CommunityModel(
-      name: "Panitia IS Night 2026",
-      imageUrl: "https://picsum.photos/seed/isnight/200",
-      subGroups: [
-        SubGroupModel(
-          name: "Announcements",
-          lastSender: "+62 813-8787-3288",
-          lastMessage: "joined",
-          time: "3/12/26",
-          imageUrl: "",
-          isAnnouncements: true,
-        ),
-      ],
-    ),
+    
   ];
 
   static const List<CallModel> calls = [
-    CallModel(name: "Jamie", time: "Today, 08:22", imageUrl: "", isVideo: true, isIncoming: false),
-    CallModel(name: "Dokter Sandra", time: "Yesterday, 20:47", imageUrl: ""),
-    CallModel(name: "Jagoan", time: "Yesterday, 19:59", imageUrl: "", isIncoming: false),
-    CallModel(name: "Kate Shrine", time: "Yesterday, 17:16", imageUrl: "https://picsum.photos/seed/tania/200", isIncoming: false),
-    CallModel(name: "Boss", time: "Yesterday, 11:27", imageUrl: "https://picsum.photos/seed/cathrine/200"),
+    CallModel(name: "Mami 🤱", time: "Today, 08:22", imageUrl: "https://picsum.photos/id/50/200", isVideo: true, isIncoming: false),
+    CallModel(name: "Dokter Sandra", time: "Yesterday, 20:47", imageUrl: "", isIncoming: false),
+    CallModel(name: "Ellen (UMN 23)", time: "Yesterday, 19:59", imageUrl: "", isIncoming: false),
+    CallModel(name: "Chrisy (dkv 25)", time: "Yesterday, 17:16", imageUrl: "https://picsum.photos/seed/kate/200", isIncoming: false),
+    CallModel(name: "Boss", time: "Yesterday, 11:27", imageUrl: "https://picsum.photos/seed/boss/200"),
+    CallModel(name: "Ex 💔", time: "March 24, 02:59", imageUrl: "https://picsum.photos/id/237/200", isMissed: true),
+    CallModel(name: "Ex 💔", time: "March 24, 02:53", imageUrl: "https://picsum.photos/id/237/200", isMissed: true),
+    CallModel(name: "Ex 💔", time: "March 23, 23:12", imageUrl: "https://picsum.photos/id/237/200", isMissed: true),
+    CallModel(name: "Pheodore Tandela", time: "March 2, 08:30", imageUrl: "", isIncoming: false),
+    CallModel(name: "Pheodore Tandela", time: "March 2, 08:22", imageUrl: "", isMissed: true),
+    CallModel(name: "Ibu Dinda", time: "March 1, 09:12", imageUrl: "https://picsum.photos/id/22/200",),
+    CallModel(name: "Mami 🤱", time: "January 22, 08:22", imageUrl: "https://picsum.photos/id/50/200", isVideo: true),
   ];
+
+
 
 }

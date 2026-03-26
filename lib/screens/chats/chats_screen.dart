@@ -60,10 +60,13 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       actions: [
         IconButton(
+          iconSize: 18,
+          padding: EdgeInsets.zero,
           icon: const Icon(Icons.camera_alt_outlined, color: Colors.black), 
           onPressed: () {}
         ),
         IconButton(
+          iconSize: 18,
           icon: const Icon(Icons.more_vert, color: Colors.black), 
           onPressed: () {}
         ),
@@ -104,7 +107,12 @@ class _ChatScreenState extends State<ChatScreen> {
     final filters = ["All", "Unread", "Favorites", "Groups"];
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+     padding: const EdgeInsets.only(
+        top: 14,      // Bagian atas diubah menjadi 15 sesuai permintaan
+        bottom: 6,    // Bagian bawah tetap 6 (diambil dari vertical: 6 sebelumnya)
+        left: 10,     // Kiri tetap 10 (diambil dari horizontal: 10)
+        right: 10,    // Kanan tetap 10 (diambil dari horizontal: 10)
+      ),
       child: Row(
         children: [
           ...filters.map((f) => Padding(
@@ -185,7 +193,7 @@ class _ChatScreenState extends State<ChatScreen> {
         chat.lastMessage, 
         maxLines: 1, 
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: AppColors.textGray, fontSize: 11), 
+        style: const TextStyle(color: AppColors.textGray, fontSize: 13), 
       ),
       //ENDS
       trailing: Column(

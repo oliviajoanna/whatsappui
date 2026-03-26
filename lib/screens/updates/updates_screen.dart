@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/dummy_data.dart';
+import '../../models/find_channel_model.dart'; // Pastikan path ini benar sesuai struktur folder Anda
 
 class UpdatesScreen extends StatefulWidget {
   const UpdatesScreen({super.key});
@@ -19,21 +20,22 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           _buildSliverAppBar(),
           SliverList(
             delegate: SliverChildListDelegate([
-              const Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text(
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 16, 10, 8),
+                child: const Text(
                   "Status",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-              _buildStatusSection(), // Horizontal scrollable status
+              _buildStatusSection(),
               const SizedBox(height: 16),
-              _buildChannelsSection(), // Vertical channels list
+              _buildChannelsSection(),
+              const SizedBox(height: 24),
+              _buildFindChannelsSection(), 
             ]),
           ),
         ],
       ),
-      // Floating Action Button ganda (Kamera & Edit) seperti di gambar
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -41,21 +43,20 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
             onPressed: () {},
             backgroundColor: AppColors.surfaceGray,
             elevation: 2,
-            child: const Icon(Icons.edit, color: AppColors.darkGreen),
+            child: const Icon(Icons.edit, color: AppColors.textGray, size: 20),
           ),
           const SizedBox(height: 16),
           FloatingActionButton(
             onPressed: () {},
             backgroundColor: AppColors.darkGreen,
             elevation: 4,
-            child: const Icon(Icons.camera_alt, color: AppColors.white),
+            child: const Icon(Icons.camera_alt, color: AppColors.white, size: 24),
           ),
         ],
       ),
     );
   }
 
-  // Navbar Updates
   Widget _buildSliverAppBar() {
     return SliverAppBar(
       floating: false,
@@ -67,36 +68,40 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         style: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.normal,
-          fontSize: 24,
+          fontSize: 20,
         ),
       ),
       actions: [
         IconButton(
+          iconSize: 18,
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(),
           icon: const Icon(Icons.search, color: Colors.black),
           onPressed: () {},
         ),
+        const SizedBox(width: 15),
         IconButton(
+          iconSize: 18,
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(),
           icon: const Icon(Icons.more_vert, color: Colors.black),
           onPressed: () {},
         ),
+        const SizedBox(width: 10),
       ],
     );
   }
 
-  // Horizontal Scrollable Status Section
   Widget _buildStatusSection() {
     return SizedBox(
-      height: 180,
+      height: 160,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         itemCount: DummyData.statuses.length + 1,
         itemBuilder: (context, index) {
-          if (index == 0) {
-            return _buildAddStatusCard();
-          }
-          final status = DummyData.statuses[index - 1];
-          return _buildStatusCard(status);
+          if (index == 0) return _buildAddStatusCard();
+          return _buildStatusCard(DummyData.statuses[index - 1]);
         },
       ),
     );
@@ -104,40 +109,34 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
 
   Widget _buildAddStatusCard() {
     return Container(
-      width: 110,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: 100,
+      margin: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: Stack(
         children: [
           const Center(
             child: CircleAvatar(
-              radius: 24,
+              radius: 18,
               backgroundColor: Color(0xFFE9EDF0),
-              child: Icon(Icons.person, color: Colors.white, size: 30),
+              child: Icon(Icons.person, color: Colors.white, size: 24),
             ),
           ),
           Positioned(
-            top: 60,
-            left: 65,
+            bottom: 45,
+            right: 32,
             child: Container(
               padding: const EdgeInsets.all(2),
-              decoration: const BoxDecoration(
-                color: AppColors.darkGreen,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.add, color: Colors.white, size: 18),
+              decoration: const BoxDecoration(color: AppColors.darkGreen, shape: BoxShape.circle),
+              child: const Icon(Icons.add, color: Colors.white, size: 14),
             ),
           ),
           const Positioned(
-            bottom: 12,
-            left: 12,
-            child: Text(
-              "Add\nstatus",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-            ),
+            bottom: 8,
+            left: 8,
+            child: Text("Add\nstatus", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
           ),
         ],
       ),
@@ -146,56 +145,41 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
 
   Widget _buildStatusCard(status) {
     return Container(
-      width: 110,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: 100,
+      margin: const EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        image: DecorationImage(
-          image: NetworkImage(status.imageUrl),
-          fit: BoxFit.cover,
-        ),
+        borderRadius: BorderRadius.circular(12),
+        image: DecorationImage(image: NetworkImage(status.imageUrl), fit: BoxFit.cover),
       ),
       child: Stack(
         children: [
-          // Overlay gelap tipis agar teks putih terlihat
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.transparent, Colors.black.withOpacity(0.4)],
+                colors: [Colors.transparent, Colors.black.withOpacity(0.5)],
               ),
             ),
           ),
-          // Ring Foto Profil (Hijau jika belum dilihat)
           Positioned(
-            top: 8,
+            top: 6,
+            left: 6,
+            child: CircleAvatar(
+              radius: 14,
+              backgroundColor: AppColors.darkGreen,
+              child: CircleAvatar(radius: 12, backgroundImage: NetworkImage(status.imageUrl)),
+            ),
+          ),
+          Positioned(
+            bottom: 8,
             left: 8,
-            child: Container(
-              padding: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.darkGreen, width: 2),
-              ),
-              child: CircleAvatar(
-                radius: 16,
-                backgroundImage: NetworkImage(status.imageUrl),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 12,
-            left: 12,
-            right: 8,
+            right: 4,
             child: Text(
               status.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-              ),
-              maxLines: 2,
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 11),
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -204,123 +188,142 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
     );
   }
 
-  // Channels Section
-Widget _buildChannelsSection() {
+  Widget _buildChannelsSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Channels",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Row(
-                  children: [
-                    Text("Explore", style: TextStyle(color: AppColors.darkGreen, fontWeight: FontWeight.bold)),
-                    Icon(Icons.chevron_right, color: AppColors.darkGreen, size: 20),
-                  ],
+              const Text("Channels", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.surfaceGray,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    "Explore",
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        
-        // Daftar Channel yang sudah di-follow (mengambil dari DummyData)
         ...DummyData.channels.map((channel) => ListTile(
-              leading: CircleAvatar(
-                radius: 24,
-                backgroundImage: NetworkImage(channel.imageUrl),
-              ),
-              title: Text(channel.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text(channel.description, maxLines: 1, overflow: TextOverflow.ellipsis),
-              trailing: Text(channel.date, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-            )),
-            
-        const SizedBox(height: 16),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            "Find channels to follow",
-            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+          visualDensity: const VisualDensity(vertical: -2.5),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          horizontalTitleGap: 12,
+          minLeadingWidth: 0,
+          leading: CircleAvatar(
+            radius: 18,
+            backgroundImage: NetworkImage(channel.imageUrl),
           ),
-        ),
-        
-        // Contoh Find Channels menggunakan helper widget
-        ...List.generate(3, (index) => _buildFollowChannelTile(index)),
-
-        const SizedBox(height: 24),
-
-        // Tombol Explore More
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 48),
-              side: BorderSide(color: Colors.grey.shade300),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.grid_view_rounded, color: AppColors.darkGreen, size: 20),
-                SizedBox(width: 8),
-                Text("Explore more", style: TextStyle(color: AppColors.darkGreen, fontWeight: FontWeight.bold)),
-              ],
-            ),
+          title: Row(
+            children: [
+              Text(channel.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              const SizedBox(width: 4),
+              const Icon(Icons.verified, color: Colors.blue, size: 14),
+            ],
           ),
-        ),
-
-        const SizedBox(height: 12),
-
-        // Tombol Create Channel
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 48),
-              side: BorderSide(color: Colors.grey.shade300),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.add, color: AppColors.darkGreen, size: 20),
-                SizedBox(width: 8),
-                Text("Create channel", style: TextStyle(color: AppColors.darkGreen, fontWeight: FontWeight.bold)),
-              ],
-            ),
+          subtitle: Text(
+            channel.description, 
+            maxLines: 1, 
+            overflow: TextOverflow.ellipsis, 
+            style: const TextStyle(fontSize: 13, color: AppColors.textGray)
           ),
-        ),
-        
-        const SizedBox(height: 80), // Jarak ekstra agar tidak tertutup tombol FAB (Kamera)
+          trailing: Text(channel.date, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+        )),
       ],
     );
   }
 
-  // Helper widget untuk daftar channel yang bisa di-follow
-  Widget _buildFollowChannelTile(int index) {
-    List<String> names = ["Ust Abdul Somad", "Ust Adi Hidayat", "RESEP DAPUR RUMA...", "FC Barcelona", "Manchester United"];
-    return ListTile(
-      leading: const CircleAvatar(radius: 24, backgroundColor: Colors.grey),
-      title: Text(names[index % names.length], style: const TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: const Text("1.2M followers"),
-      trailing: OutlinedButton(
-        onPressed: () {},
-        style: OutlinedButton.styleFrom(
-          backgroundColor: const Color(0xFFE7FCE3),
-          side: BorderSide.none,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+  Widget _buildFindChannelsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "Find channels to follow",
+            style: TextStyle(color: AppColors.textGray, fontWeight: FontWeight.bold, fontSize: 14),
+          ),
         ),
-        child: const Text("Follow", style: TextStyle(color: AppColors.darkGreen, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        // MENGAMBIL DATA DARI DummyData.suggestedChannels SESUAI MODEL BARU ANDA
+        ...DummyData.suggestedChannels.map((channel) => _buildFollowChannelTile(channel)),
+        
+        const SizedBox(height: 24),
+        _buildBottomButton("Explore more", Icons.grid_view_rounded),
+        const SizedBox(height: 12),
+        _buildBottomButton("Create channel", Icons.add),
+        const SizedBox(height: 100),
+      ],
+    );
+  }
+
+  Widget _buildFollowChannelTile(FindChannelModel channel) {
+    return ListTile(
+      visualDensity: const VisualDensity(vertical: -2),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      horizontalTitleGap: 12,
+      minLeadingWidth: 0,
+      leading: CircleAvatar(
+        radius: 22, 
+        backgroundColor: AppColors.surfaceGray, 
+        backgroundImage: NetworkImage(channel.imageUrl),
+      ),
+      title: Row(
+        children: [
+          Text(channel.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          if (channel.isVerified) ...[
+            const SizedBox(width: 4),
+            const Icon(Icons.verified, color: Colors.blue, size: 14),
+          ],
+        ],
+      ),
+      subtitle: Text(
+        "${channel.followers} followers", 
+        style: const TextStyle(fontSize: 13, color: AppColors.textGray)
+      ),
+      trailing: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFFE7FCE3),
+          foregroundColor: AppColors.darkGreen,
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+        ),
+        child: const Text("Follow", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
       ),
     );
   }
+
+  Widget _buildBottomButton(String label, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: OutlinedButton(
+        onPressed: () {},
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 45),
+          side: BorderSide(color: Colors.grey.shade300),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: AppColors.darkGreen, size: 18),
+            const SizedBox(width: 8),
+            Text(label, style: const TextStyle(color: AppColors.darkGreen, fontWeight: FontWeight.bold, fontSize: 14)),
+          ],
+        ),
+      ),
+    );
   }
+}
