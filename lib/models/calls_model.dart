@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class CallModel {
   final String name;
   final String time;

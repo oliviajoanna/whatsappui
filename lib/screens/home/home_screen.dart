@@ -26,32 +26,50 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        backgroundColor: Colors.white,
-        onDestinationSelected: (i) => setState(() => _selectedIndex = i),
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.chat_outlined), 
-            selectedIcon: Icon(Icons.chat),
-            label: 'Chats',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.update_outlined), 
-            selectedIcon: Icon(Icons.update),
-            label: 'Updates',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.people_outline), 
-            selectedIcon: Icon(Icons.people),
-            label: 'Communities',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.call_outlined), 
-            selectedIcon: Icon(Icons.call),
-            label: 'Calls',
-          ),
-        ],
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(
+                fontSize: 11, // Font size when selected
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              );
+            }
+            return const TextStyle(
+              fontSize: 10, // Font size when unselected
+              fontWeight: FontWeight.normal,
+              color: Colors.black54,
+            );
+          }),
+        ),
+        child: NavigationBar(
+          selectedIndex: _selectedIndex,
+          backgroundColor: Colors.white,
+          onDestinationSelected: (i) => setState(() => _selectedIndex = i),
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.chat_outlined), 
+              selectedIcon: Icon(Icons.chat),
+              label: 'Chats',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.update_outlined), 
+              selectedIcon: Icon(Icons.update),
+              label: 'Updates',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.people_outline), 
+              selectedIcon: Icon(Icons.people),
+              label: 'Communities',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.call_outlined), 
+              selectedIcon: Icon(Icons.call),
+              label: 'Calls',
+            ),
+          ],
+        ),
       ),
     );
   }
