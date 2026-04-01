@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/dummy_data.dart';
 import '../../models/chat_model.dart';
+import 'chat_room_screen.dart';
+import '../camera/camera_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -63,7 +65,12 @@ class _ChatScreenState extends State<ChatScreen> {
           iconSize: 18,
           padding: EdgeInsets.zero,
           icon: const Icon(Icons.camera_alt_outlined, color: Colors.black), 
-          onPressed: () {}
+          onPressed: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Camera()),
+          );
+          }
         ),
         IconButton(
           iconSize: 18,
@@ -177,17 +184,23 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildChatTile(ChatModel chat) {
     return ListTile(
-      // Padding and space
+      // Properti navigasi yang ditambahkan
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatRoom(chat: chat), // Mengirim data chat ke room
+          ),
+        );
+      },
       visualDensity: const VisualDensity(vertical: -2.5),
       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-      horizontalTitleGap: 12, 
-      //  Ensures the text doesn't have extra padding if the icon is small
+      horizontalTitleGap: 12,   
       minLeadingWidth: 0,
       leading: CircleAvatar(
         backgroundImage: NetworkImage(chat.imageUrl),
-        radius: 18, //AVATAR SIZE
+        radius: 18,
       ),
-      //CHAT NAME AND LAST MESSAGE
       title: Text(chat.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
       subtitle: Text(
         chat.lastMessage, 
@@ -195,13 +208,12 @@ class _ChatScreenState extends State<ChatScreen> {
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(color: AppColors.textGray, fontSize: 13), 
       ),
-      //ENDS
       trailing: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            chat.time, //CHAT TIME
+            chat.time,
             style: TextStyle(
               color: chat.unreadCount > 0 ? AppColors.darkGreen : AppColors.textGray,
               fontSize: 10,

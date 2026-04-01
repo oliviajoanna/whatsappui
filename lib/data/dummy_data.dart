@@ -4,6 +4,7 @@ import '../models/channel_model.dart';
 import '../models/community_model.dart';
 import '../models/calls_model.dart';
 import '../models/find_channel_model.dart';
+import '../models/camera_model.dart';
 
 
 class DummyData {
@@ -99,7 +100,7 @@ class DummyData {
       imageUrl: "https://picsum.photos/seed/olympics/200",
     ),
     ChannelModel(
-      name: "Sistem Informasi UPH",
+      name: "Sisfor UPH",
       description: "Sekilas cuplikan dari keseharian ...",
       date: "11/15/25",
       imageUrl: "https://picsum.photos/seed/uph/200",
@@ -216,6 +217,37 @@ class DummyData {
     CallModel(name: "Mami 🤱", time: "January 22, 08:22", imageUrl: "https://picsum.photos/id/50/200", isVideo: true),
   ];
 
+  // Di bagian atas file dummy_data.dart
+
+
+// Di dalam class DummyData
+static const List<CameraGalleryModel> cameraGallery = [
+  CameraGalleryModel(
+    id: "1",
+    imageUrl: "https://picsum.photos/id/1/200/300",
+    isVideo: false,
+  ),
+  CameraGalleryModel(
+    id: "2",
+    imageUrl: "https://picsum.photos/id/10/200/300",
+    isVideo: true,
+  ),
+  CameraGalleryModel(
+    id: "3",
+    imageUrl: "https://picsum.photos/id/20/200/300",
+    isVideo: false,
+  ),
+  CameraGalleryModel(
+    id: "4",
+    imageUrl: "https://picsum.photos/id/30/200/300",
+    isVideo: false,
+  ),
+  CameraGalleryModel(
+    id: "5",
+    imageUrl: "https://picsum.photos/id/40/200/300",
+    isVideo: true,
+  ),
+];
 
 
 }
